@@ -3,7 +3,7 @@ import telebot, requests
 from telebot import types
 
 bot = telebot.TeleBot(config.token)
-# Обычный режим
+# Neoбычный режим
 @bot.message_handler(content_types=["text"])
 def any_msg(message):
     keyboard = types.InlineKeyboardMarkup()
