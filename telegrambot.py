@@ -7,6 +7,8 @@ bot = telebot.TeleBot(config.token)
 @bot.message_handler(content_types=["text"])
 def any_msg(message):
     keyboard = types.InlineKeyboardMarkup()
+    if message.text=='Привет':
+        bot.send_message(message.chat.id, 'Привет.Как дела?')
     url_button = types.InlineKeyboardButton(text=" k kaba kz",url='https://www.youtube.com/channel/UC_cBsck6NyqzSDaNEfOJ5HQ' )
     url_button2 = types.InlineKeyboardButton(text="ютуб",url='https://www.youtube.com' )
     url_button3 = types.InlineKeyboardButton(text="меня создал",url='https://vk.com/id289417861' )
