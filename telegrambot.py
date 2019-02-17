@@ -7,14 +7,24 @@ bot = telebot.TeleBot(config.token)
 @bot.message_handler(content_types=["text"])
 def any_msg(message):
     keyboard = types.InlineKeyboardMarkup()
-    if message.text=='Привет':
-        bot.send_message(message.chat.id, 'Привет.Как дела?')
+    if message.text=='привет':
+        bot.send_message(message.chat.id, 'привет,как ваши дела?')
+    elif message.text == "отлично" and 'хорошо':
+        bot.send_message(message.chat.id, "Quanyshtymyn!!")
+        bot.send_message(message.chat.id, 'Может вам понадобиться наши инлайн кнопки')
+    if message.text == "пока нет":
+        bot.send_message(message.chat.id, 'OK!!')
+    if message.text == 'давайте':
+        bot.send_message(message.chat.id, 'Вот!' )
+    if message.text == 'открой мне гугл классрум':
+        bot.send_message(message.chat.id, 'Открываю https://classroom.google.com нажмите на ссылку')
     url_button = types.InlineKeyboardButton(text=" k kaba kz",url='https://www.youtube.com/channel/UC_cBsck6NyqzSDaNEfOJ5HQ' )
     url_button2 = types.InlineKeyboardButton(text="ютуб",url='https://www.youtube.com' )
     url_button3 = types.InlineKeyboardButton(text="меня создал",url='https://vk.com/id289417861' )
-    keyboard.add(url_button,url_button2,url_button3)
-    bot.send_message(message.chat.id, "Я – обычный бот", reply_markup=keyboard)
-
+    url_button4 = types.InlineKeyboardButton(text='classroom',url='https://classroom.google.com')
+    keyboard.add(url_button,url_button2,url_button3,url_button4)
+    if message.text == 'открой мне ютуб':
+        bot.send_message(message.chat.id, 'Открываю https://www.youtube.com нажмите на ссылку')
 
 # Инлайн-режим с непустым запросом
 @bot.inline_handler(lambda query: len(query.query) > 0)
