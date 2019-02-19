@@ -9,7 +9,7 @@ from firebase_admin import db
 
 
 cred = credentials.Certificate("kasym.json")
-firebase_admin.initialize_app(cred, {'databaseURL': 'https://grgrgrw-3bc83.firebaseio.com/'})
+default_app = firebase_admin.initialize_app(cred, {'databaseURL': 'https://grgrgrw-3bc83.firebaseio.com/'})
 
 
 bot = telebot.TeleBot(config.token)
@@ -26,92 +26,51 @@ def start(message):
 def answer(message):
     if message.text == "Тарих":
         keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-        keyboard.add(*[types.KeyboardButton(question) for question in ['dodo', 'wewe', 'baba', 'haha', 'byby']])
+        keyboard.add(*[types.KeyboardButton(question) for question in ['dada', 'baba', 'haha', 'gaga', 'fafa']])
         msg = bot.send_message(message.chat.id, "Кандай суракты тандайсыз?", reply_markup = keyboard)
         bot.register_next_step_handler(msg, answer_subject)
-    elif message.text == "Физика":
+    if message.text == "Физика":
         keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-        keyboard.add(*[types.KeyboardButton(question) for question in ['dodo', 'wewe', 'baba', 'haha', 'byby']])
+        keyboard.add(*[types.KeyboardButton(question) for question in ['do', 'we', 'ba', 'ha', 'by']])
         msg = bot.send_message(message.chat.id, "Кандай суракты тандайсыз?", reply_markup = keyboard)
         bot.register_next_step_handler(msg, answer_subject)
-    elif message.text == "Биология":
+    if message.text == "Биология":
         keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-        keyboard.add(*[types.KeyboardButton(question) for question in ['dodo', 'wewe', 'baba', 'haha', 'byby']])
+        keyboard.add(*[types.KeyboardButton(question) for question in ['dos', 'wes', 'bas', 'has', 'bys']])
         msg = bot.send_message(message.chat.id, "Кандай суракты тандайсыз?", reply_markup = keyboard)
         bot.register_next_step_handler(msg, answer_subject)
-    elif message.text == "География":
+    if message.text == "География":
         keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-        keyboard.add(*[types.KeyboardButton(question) for question in ['dodo', 'wewe', 'baba', 'haha', 'byby']])
+        keyboard.add(*[types.KeyboardButton(question) for question in ['dosh', 'wesh', 'bash', 'hash', 'bysh']])
         msg = bot.send_message(message.chat.id, "Кандай суракты тандайсыз?", reply_markup = keyboard)
         bot.register_next_step_handler(msg, answer_subject)
+
+
         
 @bot.message_handler(content_types = ['text'])
 def answer_subject(message):
-    if message.text == 'dodo':
-        bot.send_message(message.chat.id, "Басталды 1914 жылы")
-    elif message.text == 'wewe':
-        bot.send_message(message.chat.id, "Басталды 1770 жылы")
-    elif message.text == 'baba':
-        bot.send_message(message.chat.id, "Басталды 1980 жылы")
-    elif message.text == 'haha':
-        bot.send_message(message.chat.id, "Басталды 1875 жылы")
-    elif message.text == 'byby':
-        bot.send_message(message.chat.id, "Басталды 1941 жылы")
+    if message.text == 'dada':
+        subject = db.reference('/Тарих/a/dada').get()
+        bot.send_message(message.chat.id, subject)
+    if message.text == 'baba':
+        subject = db.reference('/Тарих/b/baba').get()
+        bot.send_message(message.chat.id, subject)
+    if message.text == 'haha':
+        subject = db.reference('/Тарих/c/haha').get()
+        bot.send_message(message.chat.id, subject)
+    if message.text == 'gaga':
+       subject = db.reference('/Тарих/d/gaga').get()
+       bot.send_message(message.chat.id, subject)
+    if message.text == 'fafa':
+        subject = db.reference('/Тарих/e/dada').get()
+        bot.send_message(message.chat.id, subject)
+    
 
-
-@bot.message_handler(content_types = ['text'])
-def answer_subject(message):
-    if message.text == 'do':
-        bot.send_message(message.chat.id, "Басталды 5418 жылы")
-    elif message.text == 'we':
-        bot.send_message(message.chat.id, "Басталды 8745 жылы")
-    elif message.text == 'ba':
-        bot.send_message(message.chat.id, "Басталды 7278 жылы")
-    elif message.text == 'ha':
-        bot.send_message(message.chat.id, "Басталды 1742 жылы")
-    elif message.text == 'by':
-        bot.send_message(message.chat.id, "Басталды 7255 жылы")
-
-
-
-@bot.message_handler(content_types = ['text'])
-def answer_subject(message):
-    if message.text == 'dos':
-        bot.send_message(message.chat.id, "Басталды 5386 жылы")
-    elif message.text == 'wes':
-        bot.send_message(message.chat.id, "Басталды 4580 жылы")
-    elif message.text == 'bas':
-        bot.send_message(message.chat.id, "Басталды 5684 жылы")
-    elif message.text == 'has':
-        bot.send_message(message.chat.id, "Басталды 5784 жылы")
-    elif message.text == 'bys':
-        bot.send_message(message.chat.id, "Басталды 6544 жылы")
-
-
-
-@bot.message_handler(content_types = ['text'])
-def answer_subject(message):
-    if message.text == 'dosh':
-        bot.send_message(message.chat.id, "Басталды 9455 жылы")
-    elif message.text == 'wesh':
-        bot.send_message(message.chat.id, "Басталды 7633 жылы")
-    elif message.text == 'bash':
-        bot.send_message(message.chat.id, "Басталды 5653 жылы")
-    elif message.text == 'hash':
-        bot.send_message(message.chat.id, "Басталды 5438 жылы")
-    elif message.text == 'bysh':
-        bot.send_message(message.chat.id, "Басталды 5634 жылы")
-
-
-    '''
-
-def answer(message):
-    keyboard = types.ReplyKeyboardMarkup()
     
     
         
 
-
+'''
 @bot.message_handler(content_types=["text"])
 def any_msg(message):
     keyboard = types.InlineKeyboardMarkup()
